@@ -78,8 +78,8 @@ if (isset($_POST['filter'])) {
              <!-- Divider -->
              <hr class="sidebar-divider my-0">
 
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
+                 <!-- Nav Item - Dashboard -->
+                 <li class="nav-item active">
                     <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-info-circle"></i>
                         <span>Tentang</span></a>
@@ -98,7 +98,7 @@ if (isset($_POST['filter'])) {
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="tables.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Report</span></a>
@@ -183,50 +183,87 @@ if (isset($_POST['filter'])) {
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                <div class="row">
+
                      <!-- DataTales Example -->
+                     <div class="col-xl-6 col-lg-5">
                      <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h5 class="m-0 font-weight-bold" style="color: #008000;">Data Report</h5>
+                            <h5 class="m-0 font-weight-bold" style="color: #008000;">Profil DD ORCHID NURSERY</h5>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                            <form method="post">
-                                    <table>
-                                        <tr>
-                                            <td>Dari Tanggal dan Waktu</td>
-                                            <td><input type="datetime-local" name="dari_tgl" value="<?php echo $dari_tgl; ?>" required="required"></td>
-                                            <td>Sampai Tanggal dan Waktu</td>
-                                            <td><input type="datetime-local" name="sampai_tgl" value="<?php echo $sampai_tgl; ?>" required="required"></td>
-                                            <td><input type="submit" class="btn btn-primary" style="background-color:#008000;"   name="filter" value="Filter"></td>
-                                        </tr>
-                                    </table>
-                                </form>
-                                <br>
-                                <table class="table table-bordered" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Kelembapan</th>
-                                            <th>Suhu</th>
-                                            <th>Durasi Relay</th>
-                                            <th>Waktu</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php while ($row = mysqli_fetch_array($data_report)) { ?>
-                                        <tr>
-                                            <td><?php echo $row['ID']; ?></td>
-                                            <td><?php echo $row['kelembapan']; ?></td>
-                                            <td><?php echo $row['suhu']; ?></td>
-                                            <td><?php echo $row['relay_duration']; ?></td>
-                                            <td><?php echo $row['tanggal']; ?></td>
-                                        </tr>
-                                    <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
+
+                        <h4 style="color:black; text-align: justify;">
+                        DD Orchid Nursery merupakan perusahaan yang bergerak dibidang budidaya pertanian khususnya Anggrek dan agrowisata. 
+                        Berdirinya DD Orchid Nursery ini didorong oleh semakin berkurangnya lahan pertanian di Kelurahan Dadaprejo. 
+                        DD Orchid berdiri pada tahun 2007 yang telah berkontribusi terhadap suplai Anggrek.
+                        </h4>
+                            
                         </div>
                     </div>
+                </div>
+
+                <!-- DataTales Example -->
+                <div class="col-xl-6 col-lg-5">
+                     <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="m-0 font-weight-bold" style="color: #008000;">Logo DD ORCHID NURSERY</h5>
+                        </div>
+                        <div class="card-body text-center">
+                        <img src="img/LOGO BLACK DD ORCHID.png" class="img-fluid" alt="Logo DD Orchid Nursery" style="width: 37%; max-width: 60%;">
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+                <div class="row">
+
+                     <!-- DataTales Example -->
+                     <div class="col-xl-6 col-lg-5">
+                     <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="m-0 font-weight-bold" style="color: #008000;">Visi dan Misi Perusahaan </h5>
+                        </div>
+                        <div class="card-body">
+                        <h3 style="color:black">Visi Perusahaan</h3>
+                        <p style="color:black; text-align:justify">Menjadikan DD Orchid Nursery sebagai perusahaan dengan produk berkualitas 
+                            yang mengedepankan konservasi, inovasi dan edukasi berbasis pemberdayaan Masyarakat</p>
+                        <h3 style="color:black">Misi Perusahaan</h3>
+                        <p style="color:black">1. Menjadikan DD Orchid Nursery sebagai produsen anggrek yang berkualitas. </p>
+                        <p style="color:black">2. Menciptakan sumberdaya manusia yang jujur, kreatif, inovatif, dan memiliki jiwa entrepreneurship  </p>
+                        <p style="color:black">3. Mengeksplorasi potensi pariwisata dan ekonomi kreatif berbasis pemberdayaan masyarakat  </p>
+                        <p style="color:black">4. Melestarikan anggrek spesies di Indonesia </p>
+                        
+                        
+
+
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-5">
+                     <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="m-0 font-weight-bold" style="color: #008000;">Struktur Organisasi</h5>
+                        </div>
+                        <div class="card-body text-center">
+                        <img src="img/SO.png" class="img-fluid" alt="Struktur Organisasi" style="width: 100%; max-width: 300%;">
+                        </div>
+                    </div>                        
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                </div>
+
+
+
+                
+
 
                 </div>
                 <!-- /.container-fluid -->

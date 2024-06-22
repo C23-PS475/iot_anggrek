@@ -23,6 +23,20 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
+$query = "SELECT status FROM status";
+$result = $conn->query($query);
+
+if ($result->num_rows > 0) {
+    // Fetch the status (assuming it's a single row result)
+    $row = $result->fetch_assoc();
+    $status = $row['status'];
+
+    // Now you have $status (either '0' or '1')
+} else {
+    // Handle the case where no rows are returned
+    $status = null; // Or some default value
+}
+
 $conn->close();
 ?>
 
@@ -56,6 +70,26 @@ $conn->close();
 </head>
 
 <style type="text/css">
+
+.status-badge {
+        font-size: 1.8em;
+        padding: 10px 10px;
+        border-radius: 5px;
+        color: #fff;
+        text-align: center;
+        display: inline-block;
+        width: 100px; /* Sesuaikan lebar badge sesuai kebutuhan */
+        margin-bottom: 10px; /* Atur margin jika diperlukan */
+    }
+
+    .status-on {
+        background-color: #28a745; /* Warna hijau untuk status ON */
+    }
+
+    .status-off {
+        background-color: #dc3545; /* Warna merah untuk status OFF */
+    }
+
 	div.testArea{
 		display:inline-block;
 		width:16em;
@@ -185,7 +219,10 @@ $(document).ready(function(){
             $("#dlText").load('ceksensor.php #kelembapan');
             $("#ulText").load('ceksensor.php #suhu');
             $("#grafik").load('data.php');
+            $("#grafik2").load('data2.php');
+
     });
+
 
     }, 1000);
     
@@ -295,6 +332,16 @@ function updateUI(forced) {
                 </div>
                 <div class="sidebar-brand-text mx-3">Monitoring Anggrek<sup>JTD</sup></div>
             </a>
+
+             <!-- Divider -->
+             <hr class="sidebar-divider my-0">
+
+                 <!-- Nav Item - Dashboard -->
+                 <li class="nav-item">
+                    <a class="nav-link" href="dashboard.php">
+                    <i class="fas fa-fw fa-info-circle"></i>
+                        <span>Tentang</span></a>
+                </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -428,12 +475,17 @@ function updateUI(forced) {
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h5 class="m-0 font-weight-bold" style="color: #008000;">Green House</h5>
+                                    <h5 class="m-0 font-weight-bold" style="color: #008000;">Status Fuzzy</h5>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                 <div class="row">
-                                <img src="img/greenhouse.jpg" alt="Deskripsi Gambar" style="width: 100%; height: auto;">
+                                <div class="col-12 text-center">
+                                <span id="status-indicator" class="status-badge <?php echo $status == '1' ? 'status-on' : 'status-off'; ?>">
+                                    <?php echo $status == '1' ? 'ON' : 'OFF'; ?>
+                                </span>
+
+                                </div>
                                        
                                     </div>
                                     
@@ -449,18 +501,35 @@ function updateUI(forced) {
                     <div class="row">
 
                         <!-- Area Chart -->
-                        <div class="col-xl-9 col-lg-5">
-                            <div class="card shadow mb-4">
+                        <div class="col-xl-6 col-lg-2">
+                            <div class="card shadow mb-3">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h5 class="m-0 font-weight-bold" style="color: #008000;">Grafik Sensor</h5>
+                                    <h5 class="m-0 font-weight-bold" style="color: #008000;">Grafik Kelembapan</h5>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div id="grafik" style="width : 100%;">
+                                    <div id="grafik">
                                     </div>
                                     
+                                </div>
+                            </div>
+                        </div>
+                                              
+                
+                        <!-- Area Chart -->
+                        <div class="col-xl-6 col-lg-3">
+                            <div class="card shadow mb-3">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h5 class="m-0 font-weight-bold" style="color: #008000;">Grafik Suhu</h5>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div id="grafik2">
+                                    </div>
                                     
                                 </div>
                             </div>
@@ -516,6 +585,8 @@ function updateUI(forced) {
             </div>
         </div>
     </div>
+
+    
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

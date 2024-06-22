@@ -11,16 +11,16 @@ $ID_awal =  $ID_akhir - 6 ;
 
 $tanggal = mysqli_query($konek, "SELECT DATE_FORMAT(tanggal, '%H:%i:%s') AS waktu from sensor WHERE ID>='$ID_awal' and ID<='$ID_akhir' ORDER BY ID ASC");
 
-$supply = mysqli_query($konek, "SELECT kelembapan from sensor WHERE ID>='$ID_awal' and ID<='$ID_akhir' ORDER BY ID ASC");
+$demand = mysqli_query($konek, "SELECT suhu from sensor WHERE ID>='$ID_awal' and ID<='$ID_akhir' ORDER BY ID ASC");
 
 
 ?>
 
 <div class="card-body">
-    <canvas id="mychart1"></canvas>
+    <canvas id="mychart2"></canvas>
     <script type="text/javascript">
-        var canvas1 = document.getElementById('mychart1');
-        var data1 = {
+        var canvas2 = document.getElementById('mychart2');
+        var data2 = {
             labels : [
                 <?php
                     while($data_tanggal = mysqli_fetch_array($tanggal))   
@@ -29,19 +29,19 @@ $supply = mysqli_query($konek, "SELECT kelembapan from sensor WHERE ID>='$ID_awa
                     }             
                 ?>
             ],
-            datasets : [
-                {
-                label : "Kelembapan", 
+            datasets : [ 
+            {
+                label : "Suhu", 
                 fill : true,
-                backgroundColor : "rgba(52, 231, 43, 0.2)",
-                borderColor : "rgba(52, 231, 43, 1)",
+                backgroundColor : "rgba(239, 82, 93, 0.2)",
+                borderColor : "rgba(239, 82, 93, 1)",
                 lineTension : 0.5,
                 pointRadius : 5,
                 data : [
                     <?php
-                        while($data_supply = mysqli_fetch_array($supply))
+                        while($data_demand = mysqli_fetch_array($demand))
                         {
-                            echo $data_supply['kelembapan'].',' ;
+                            echo $data_demand['suhu'].',' ;
                         }
                     ?>
                 ]
@@ -50,7 +50,7 @@ $supply = mysqli_query($konek, "SELECT kelembapan from sensor WHERE ID>='$ID_awa
 
         } ;
 
-        var options1 = {
+        var options2 = {
             scales: {
                 x: {
                     title: {
@@ -69,10 +69,10 @@ $supply = mysqli_query($konek, "SELECT kelembapan from sensor WHERE ID>='$ID_awa
             animation: { duration: 5 }
         };
 
-        var myLineChart1 = new Chart(canvas1, {
+        var myLineChart2 = new Chart(canvas2, {
             type: 'line',
-            data: data1,
-            options: options1
+            data: data2,
+            options: options2
         });
     </script>
 </div>
